@@ -18,7 +18,7 @@ AFRAME.registerComponent("game-play", {
 	},
 
 	gameOver: function () {
-		var planeEL = document.querySelector("#plane");
+		var planeEL = document.querySelector("#plane_model");
 		var gameOverText = document.querySelector("#gameover");
 		gameOverText.setAttribute("visible", true);
 		planeEL.setAttribute("dynamic-body", { mass: 1 });
@@ -55,9 +55,7 @@ AFRAME.registerComponent("game-play", {
 		var minutes;
 		var seconds;
 
-		var timer = setInterval(countDown, 1000);
-
-		function countDown() {
+		setInterval(() => {
 			if (duration >= 0) {
 				minutes = parseInt(duration / 60);
 				seconds = parseInt(duration % 60);
@@ -75,9 +73,9 @@ AFRAME.registerComponent("game-play", {
 
 				duration -= 1;
 			} else {
-                clearInterval(timer);
-                this.gameOver()
+				clearInterval();
+				this.gameOver();
 			}
-		}
+		}, 1000);
 	},
 });
